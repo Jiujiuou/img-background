@@ -1,0 +1,96 @@
+.wrapper {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	flex-direction: row;
+	background-color: #e1e9f2;
+
+	.img-wrapper {
+		position: relative;
+		flex: 1;
+		height: calc(100% - 20px);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		overflow: hidden;
+		margin: 10px;
+		box-sizing: content-box;
+		border-radius: 20px;
+
+		.background {
+			width: 100%;
+			height: 100%;
+			background-color: #f6f7fa;
+			transform: scale(1.1);
+		}
+
+		.img {
+			position: absolute;
+			height: 70%;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			border-radius: 20px;
+			box-shadow: 0px 0px 30px 20px rgba(0, 0, 0, 0.3); /* 四周扩散的阴影 */
+		}
+	}
+
+	.control {
+		min-width: 300px;
+		height: calc(100% - 20px);
+		background-color: #ffffff;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		border-left: 1px solid #ebedf2;
+		margin: 10px 10px 10px 0;
+		box-sizing: content-box;
+		border-radius: 20px;
+
+		.title {
+			font-weight: bold;
+			color: rgba(0, 100, 250, 1);
+			margin-top: 10px;
+		}
+
+		.row {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		.upload-area {
+			margin-top: 20px;
+			border: 2px dashed rgba(28, 31, 35, 0.08);
+			border-radius: 10px;
+			background-color: rgba(249, 249, 249, 1);
+			text-align: center;
+			cursor: pointer;
+			display: inline-block;
+			padding: 10px 20px;
+			margin-bottom: 20px;
+
+			.text {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI,
+					PingFang SC, Hiragino Sans GB, Microsoft YaHei,
+					Helvetica Neue, Helvetica, Arial, sans-serif;
+				color: rgba(0, 100, 250, 1);
+				font-weight: bold;
+			}
+
+			&:hover {
+				border-color: rgba(0, 100, 250, 1);
+				background-color: rgba(234, 245, 255, 1);
+			}
+
+			&.dragging {
+				border-color: rgba(0, 100, 250, 1);
+				background-color: rgba(234, 245, 255, 1);
+			}
+		}
+	}
+}
