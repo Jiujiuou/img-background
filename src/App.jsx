@@ -7,7 +7,7 @@ import {
 	ColorPicker,
 	Button,
 } from "@douyinfe/semi-ui"
-import { toPng, toJpeg } from "html-to-image"
+import { toJpeg } from "html-to-image"
 import download from "downloadjs"
 import { IconBolt } from "@douyinfe/semi-icons"
 import "./index.less"
@@ -15,7 +15,14 @@ import "./index.less"
 const BackgroundType = {
 	IMAGE_BACKGROUND: "imageBackground",
 	COLOR_BACKGROUND: "colorBackground",
+	GRADIENT_COLOR_BACKGROUND: "gradientColorBackground",
 }
+
+const options = [
+	{ label: "图片背景", value: BackgroundType.IMAGE_BACKGROUND },
+	{ label: "纯色背景", value: BackgroundType.COLOR_BACKGROUND },
+	{ label: "渐变背景", value: BackgroundType.GRADIENT_COLOR_BACKGROUND },
+]
 
 const defaultBackgroundColor = "#3d6ef5"
 const defaultShadowColor = "#000"
@@ -43,6 +50,11 @@ function App() {
 	const [backgroundBrightness, setBackgroundBrightness] = useState(100)
 	const [imgBlur, setImgBlur] = useState(20)
 	const [imageBorderRadius, setImageBorderRadius] = useState(20)
+	const [gradientBackgroud, setGradientBackgroud] = React.useState(
+		"linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%)"
+	)
+
+	const [backgroundStyle, setBackgroundStyle] = useState({})
 
 	const handleFileChange = (file) => {
 		const reader = new FileReader()
@@ -67,46 +79,49 @@ function App() {
 		setIsDragging(true)
 	}
 
-	const handleChangeBackgroundType = () => {
-		setBackgroundType(
-			backgroundType === BackgroundType.IMAGE_BACKGROUND
-				? BackgroundType.COLOR_BACKGROUND
-				: BackgroundType.IMAGE_BACKGROUND
-		)
-	}
-
 	const handleDownloadImage = () => {
 		const element = document.getElementById("img-wrapper")
-		element.style.clipPath = "inset(10px 200px 10px 200px)" // 裁剪区域
 		toJpeg(element).then(function (dataUrl) {
 			download(dataUrl, "my-node.png")
 		})
 	}
 
+	useEffect(() => {
+		const newBackgroundStyle = getBaskgroundStyle()
+		setBackgroundStyle(newBackgroundStyle)
+	}, [backgroundType, imageData])
+
+	const getBaskgroundStyle = () => {
+		if (backgroundType === BackgroundType.IMAGE_BACKGROUND) {
+			return {
+				backgroundImage: `url(${imageData})`,
+				backgroundSize: "cover",
+				backgroundPosition: "center",
+				filter: `${
+					openBackgroundBlur
+						? `blur(${imgBlur}px) brightness(${backgroundBrightness}%)`
+						: `brightness(${backgroundBrightness}%)`
+				}`,
+			}
+		}
+
+		if (backgroundType === BackgroundType.COLOR_BACKGROUND) {
+			return {
+				backgroundColor: `${backgroundColor}`,
+				backgroundSize: "cover",
+				backgroundPosition: "center",
+			}
+		}
+
+		return {
+			backgroundImage: gradientBackgroud,
+		}
+	}
+
 	return (
 		<div className="wrapper">
 			<div className="img-wrapper" id="img-wrapper">
-				<div
-					className="background"
-					style={
-						backgroundType === BackgroundType.IMAGE_BACKGROUND
-							? {
-									backgroundImage: `url(${imageData})`,
-									backgroundSize: "cover",
-									backgroundPosition: "center",
-									filter: `${
-										openBackgroundBlur
-											? `blur(${imgBlur}px) brightness(${backgroundBrightness}%)`
-											: `brightness(${backgroundBrightness}%)`
-									}`,
-							  }
-							: {
-									backgroundColor: `${backgroundColor}`,
-									backgroundSize: "cover",
-									backgroundPosition: "center",
-							  }
-					}
-				></div>
+				<div className="background" style={backgroundStyle}></div>
 				{imageData && (
 					<img
 						src={imageData}
@@ -253,17 +268,10 @@ function App() {
 				<div className="title">背景</div>
 
 				<RadioGroup
-					onChange={handleChangeBackgroundType}
+					options={options}
+					onChange={(e) => setBackgroundType(e.target.value)}
 					value={backgroundType}
-					name="demo-radio-group"
-				>
-					<Radio value={BackgroundType.IMAGE_BACKGROUND}>
-						图片背景
-					</Radio>
-					<Radio value={BackgroundType.COLOR_BACKGROUND}>
-						纯色背景
-					</Radio>
-				</RadioGroup>
+				/>
 
 				{backgroundType === BackgroundType.IMAGE_BACKGROUND && (
 					<div>

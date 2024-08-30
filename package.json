@@ -15,6 +15,7 @@
     "html-to-image": "^1.11.11",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-linear-gradient-picker": "^3.0.1",
     "vite-plugin-singlefile": "^2.0.2"
   },
   "devDependencies": {
