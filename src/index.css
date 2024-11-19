@@ -1,9 +1,24 @@
+html,
 body {
   margin: 0;
   padding: 0;
+  background-color: #fff;
 }
 
 #root {
   width: 100vw;
   height: 100vh;
+}
+
+:root {
+  --border-color: #e5e7eb;
+  --botton-background-color: #f4f4f5;
+  --botton-hover-background-color: #f6f6f7;
+}
+
+@font-face {
+  font-family: "biantaoti";
+  src: url("./font/biantaoti.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
