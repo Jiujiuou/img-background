@@ -8,9 +8,9 @@ function App() {
       <Header />
       <div className="content">
         <div className="preview">
-			<div className="download-area"></div>
-		</div>
-        <div className="control"></div>
+          <div className="download-area"></div>
+        </div>
+        <div className="control">导出图片比例</div>
       </div>
     </div>
   );
