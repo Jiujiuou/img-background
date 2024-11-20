@@ -3,6 +3,26 @@ body {
   margin: 0;
   padding: 0;
   background-color: #fff;
+  --semi-color-primary: #000 !important;
+  --semi-color-primary-hover: #000 !important;
+  --semi-color-primary-light-hover: #000 !important;
+  --semi-color-primary-hover: #000 !important;
+  --semi-color-primary-light-hover: #000 !important;
+  --semi-color-secondary-hover: #000 !important;
+  --semi-color-secondary-light-hover: #000 !important;
+  --semi-color-tertiary-hover: #000 !important;
+  --semi-color-tertiary-light-hover: #000 !important;
+  --semi-color-default-hover: #000 !important;
+  --semi-color-info-hover: #000 !important;
+  --semi-color-info-light-hover: #000 !important;
+  --semi-color-success-hover: #000 !important;
+  --semi-color-success-light-hover: #000 !important;
+  --semi-color-danger-hover: #000 !important;
+  --semi-color-danger-light-hover: #000 !important;
+  --semi-color-warning-hover: #000 !important;
+  --semi-color-warning-light-hover: #000 !important;
+  --semi-color-link-hover: #000 !important;
+  --semi-color-focus-border: #000 !important;
 }
 
 #root {
@@ -10,11 +30,23 @@ body {
   height: 100vh;
 }
 
+.semi-radio {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center;
+  align-items: center;
+}
+
+.semi-radio-addon {
+  font-weight: 500 !important;
+}
+
 :root {
   --border-color: #e5e7eb;
   --botton-background-color: #f4f4f5;
   --botton-hover-background-color: #f6f6f7;
   --border-radius: 8px;
+  --semi-color-primary: #000 !important;
 }
 
 @font-face {
