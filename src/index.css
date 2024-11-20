@@ -23,6 +23,7 @@ body {
   --semi-color-warning-light-hover: #000 !important;
   --semi-color-link-hover: #000 !important;
   --semi-color-focus-border: #000 !important;
+  --semi-color-primary-active: #000 !important;
 }
 
 #root {
@@ -38,7 +39,7 @@ body {
 }
 
 .semi-radio-addon {
-  font-weight: 500 !important;
+  font-weight: 600 !important;
 }
 
 :root {
@@ -47,6 +48,7 @@ body {
   --botton-hover-background-color: #f6f6f7;
   --border-radius: 8px;
   --semi-color-primary: #000 !important;
+  --text-color: #09090b;
 }
 
 @font-face {

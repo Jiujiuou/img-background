@@ -3,6 +3,7 @@ import Header from "@/component/Header/Header";
 import useStore from "@/store";
 import RatioControl from "@/component/RatioControl/RatioControl";
 import styles from "./index.module.less";
+import ImageUpload from "./component/ImageUpload/ImageUpload";
 
 function App() {
   const downloadAreaStyle = useStore((state) => state.downloadAreaStyle);
@@ -15,6 +16,7 @@ function App() {
           <div className={styles.download} style={downloadAreaStyle}></div>
         </div>
         <div className={styles.control}>
+          <ImageUpload />
           <RatioControl />
         </div>
       </div>
