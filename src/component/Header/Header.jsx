@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
-
-import "./index.less";
+import style from "./index.module.less";
 
 function Header() {
   return (
-    <div className="header">
-      <div className="name">jiujiu-tool</div>
-      <div className="save">保存</div>
+    <div className={style.header}>
+      <div className={style.name}>jiujiu-tool</div>
+      <div className={style.save}>保存</div>
     </div>
   );
 }
