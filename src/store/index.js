@@ -1,12 +1,18 @@
 import { create } from "zustand";
 
 const useStore = create((set) => ({
-  downloadAreaStyle: {
+  // 下载区域长宽比例
+  _RatioStyle: {
     width: "70vh",
     height: "70vh",
   },
-  updateDownloadAreaStyle: (newDownloadAreaStyle) =>
-    set(() => ({ downloadAreaStyle: newDownloadAreaStyle })),
+  updateratioStyle: (newratioStyle) =>
+    set(() => ({ _RatioStyle: newratioStyle })),
+
+  // 下载区域背景图
+  _BackgroundImageStyle: {},
+  updateBackgroundStyle: (newBackgroundStyle) =>
+    set(() => ({ _BackgroundImageStyle: newBackgroundStyle })),
 }));
 
 export default useStore;

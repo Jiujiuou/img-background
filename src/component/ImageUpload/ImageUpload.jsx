@@ -1,10 +1,38 @@
 import styles from "./index.module.less";
+import useStore from "@/store";
 
 function ImageUpload() {
+  const { updateBackgroundStyle } = useStore();
+
+  const handleUploadImage = () => {
+    document.getElementById("upload-input").click();
+  };
+
+  const handleFileChange = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onload = (e) => {
+      const imageData = e.target.result;
+
+      updateBackgroundStyle({
+        backgroundImage: `url(${imageData})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      });
+    };
+  };
+
   return (
-    <div className={styles.input}>
-      <input type="file" accept="image/*" style={{ display: "none" }} />
+    <div className={styles.input} onClick={handleUploadImage}>
       上传图片
+      <input
+        type="file"
+        accept="image/*"
+        className={styles.realInput}
+        onChange={(e) => handleFileChange(e.target.files[0])}
+        id="upload-input"
+      />
     </div>
   );
 }

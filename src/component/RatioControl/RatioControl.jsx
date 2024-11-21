@@ -3,17 +3,20 @@ import { RadioGroup, Radio } from "@douyinfe/semi-ui";
 import Title from "@/component/Title/Title";
 import useStore from "@/store/index";
 import { RATIO_MAP } from "@/constant/index";
+import styles from "./index.module.less";
+import clsx from "clsx";
 
 function RatioControl() {
-  const { updateDownloadAreaStyle } = useStore();
+  const { updateratioStyle } = useStore();
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  const handleRatioChange = (e) => {
-    const newRatio = e.target.value;
+  const handleRatioChange = (newRatio, index) => {
+    setActiveIndex(index);
     const [widthRatio, heightRatio] = newRatio.split(":").map(Number);
-    const height = 80;
+    const height = 76;
     const width = (height * widthRatio) / heightRatio;
 
-    updateDownloadAreaStyle({
+    updateratioStyle({
       width: `${width}vh`,
       height: `${height}vh`,
     });
@@ -21,13 +24,21 @@ function RatioControl() {
   return (
     <>
       <Title title="下载比例" />
-      <RadioGroup defaultValue={RATIO_MAP[0]} onChange={handleRatioChange}>
-        {RATIO_MAP.map((ratio) => (
-          <Radio key={ratio} value={ratio}>
+
+      <div className={styles.groupWrapper}>
+        {RATIO_MAP.map((ratio, index) => (
+          <div
+            className={clsx(
+              styles.selectItem,
+              index === activeIndex && styles.active
+            )}
+            onClick={() => handleRatioChange(ratio, index)}
+            key={ratio}
+          >
             {ratio}
-          </Radio>
+          </div>
         ))}
-      </RadioGroup>
+      </div>
     </>
   );
 }
