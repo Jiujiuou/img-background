@@ -17,6 +17,12 @@ const useStore = create((set) => ({
   _FilterStyle: {},
   updateFilterStyle: (newFilterStyle) =>
     set(() => ({ _FilterStyle: newFilterStyle })),
+
+  _ImageBase64Url: "",
+  updateImageBase64Url: (newImageBase64Url) =>
+    set(() => ({
+      _ImageBase64Url: newImageBase64Url,
+    })),
 }));
 
 export default useStore;

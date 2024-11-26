@@ -30,6 +30,17 @@
           border-radius: var(--border-radius);
           box-shadow: 3px 3px 16px 0px rgba(0, 0, 0, 0.35);
           transition: width 0.7s ease-out, height 0.7s ease-out;
+          position: relative;
+
+          .image {
+            width: 50%;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            pointer-events: none;
+          }
 
           .download {
             width: 80vh;

@@ -12,7 +12,7 @@ function App() {
     (state) => state._BackgroundImageStyle
   );
   const _FilterStyle = useStore((state) => state._FilterStyle);
-
+  const _ImageBase64Url = useStore((state) => state._ImageBase64Url);
   return (
     <div className={styles.wrapper}>
       <div className={styles.content}>
@@ -26,6 +26,14 @@ function App() {
                 ..._RatioStyle,
               }}
             >
+              {_ImageBase64Url && (
+                <img
+                  className={styles.image}
+                  src={_ImageBase64Url}
+                  alt=""
+                  draggable="false"
+                />
+              )}
               <div
                 className={styles.download}
                 style={{
@@ -33,7 +41,7 @@ function App() {
                   ..._BackgroundImageStyle,
                   ..._FilterStyle,
                 }}
-              ></div>
+              />
             </div>
           </div>
         </div>
