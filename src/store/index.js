@@ -6,13 +6,17 @@ const useStore = create((set) => ({
     width: "70vh",
     height: "70vh",
   },
-  updateratioStyle: (newratioStyle) =>
+  updateRatioStyle: (newratioStyle) =>
     set(() => ({ _RatioStyle: newratioStyle })),
 
   // 下载区域背景图
   _BackgroundImageStyle: {},
-  updateBackgroundStyle: (newBackgroundStyle) =>
+  updateBackgroundImageStyle: (newBackgroundStyle) =>
     set(() => ({ _BackgroundImageStyle: newBackgroundStyle })),
+
+  _FilterStyle: {},
+  updateFilterStyle: (newFilterStyle) =>
+    set(() => ({ _FilterStyle: newFilterStyle })),
 }));
 
 export default useStore;

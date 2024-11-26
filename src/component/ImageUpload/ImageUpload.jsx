@@ -2,7 +2,7 @@ import styles from "./index.module.less";
 import useStore from "@/store";
 
 function ImageUpload() {
-  const { updateBackgroundStyle } = useStore();
+  const { updateBackgroundImageStyle } = useStore();
 
   const handleUploadImage = () => {
     document.getElementById("upload-input").click();
@@ -15,7 +15,7 @@ function ImageUpload() {
     reader.onload = (e) => {
       const imageData = e.target.result;
 
-      updateBackgroundStyle({
+      updateBackgroundImageStyle({
         backgroundImage: `url(${imageData})`,
         backgroundSize: "cover",
         backgroundPosition: "center",

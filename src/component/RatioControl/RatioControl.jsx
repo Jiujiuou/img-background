@@ -7,7 +7,7 @@ import styles from "./index.module.less";
 import clsx from "clsx";
 
 function RatioControl() {
-  const { updateratioStyle } = useStore();
+  const { updateRatioStyle } = useStore();
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handleRatioChange = (newRatio, index) => {
@@ -16,7 +16,7 @@ function RatioControl() {
     const height = 76;
     const width = (height * widthRatio) / heightRatio;
 
-    updateratioStyle({
+    updateRatioStyle({
       width: `${width}vh`,
       height: `${height}vh`,
     });

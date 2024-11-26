@@ -3,15 +3,15 @@ import Header from "@/component/Header/Header";
 import useStore from "@/store";
 import RatioControl from "@/component/RatioControl/RatioControl";
 import ImageUpload from "@/component/ImageUpload/ImageUpload";
-import Slider from "@/component/Slider/Slider";
+import FilterControl from "@/component/FilterControl/FilterControl";
 import styles from "./index.module.less";
 
 function App() {
-  const [value, setValue] = useState(50);
   const _RatioStyle = useStore((state) => state._RatioStyle);
   const _BackgroundImageStyle = useStore(
     (state) => state._BackgroundImageStyle
   );
+  const _FilterStyle = useStore((state) => state._FilterStyle);
 
   return (
     <div className={styles.wrapper}>
@@ -21,33 +21,27 @@ function App() {
 
           <div className={styles.downloadWrapper}>
             <div
-              className={styles.download}
+              className={styles.hidden}
               style={{
                 ..._RatioStyle,
-                ..._BackgroundImageStyle,
               }}
-            ></div>
+            >
+              <div
+                className={styles.download}
+                style={{
+                  ..._RatioStyle,
+                  ..._BackgroundImageStyle,
+                  ..._FilterStyle,
+                }}
+              ></div>
+            </div>
           </div>
         </div>
 
         <div className={styles.control}>
           <ImageUpload />
           <RatioControl />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <Slider
-            min={0}
-            max={100}
-            step={1}
-            value={value}
-            onChange={setValue}
-          />
+          <FilterControl />
         </div>
       </div>
     </div>

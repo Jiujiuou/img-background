@@ -24,15 +24,18 @@
         justify-content: center;
         align-items: center;
         flex: 1;
-        .download {
-          width: 80vh;
-          height: 80vh;
-          border: 1px solid var(--border-color);
+
+        .hidden {
+          overflow: hidden;
           border-radius: var(--border-radius);
-          box-shadow: 3px 6px 10px -3px rgba(0, 0, 0, 0.13),
-            3px 6px 10px -3px rgba(0, 0, 0, 0.13);
-          margin-top: -20px; // 往上调整一点更符合视觉审美
+          box-shadow: 3px 3px 16px 0px rgba(0, 0, 0, 0.35);
           transition: width 0.7s ease-out, height 0.7s ease-out;
+
+          .download {
+            width: 80vh;
+            height: 80vh;
+            transition: width 0.7s ease-out, height 0.7s ease-out;
+          }
         }
       }
     }
