@@ -1,13 +1,19 @@
 import { create } from "zustand";
+import {
+  DEFAULT_RATIO_STYLE,
+  DEFAULT_BOTTOM_LAYER_RATIO_STYLE,
+} from "@/constant/index";
 
 const useStore = create((set) => ({
-  // 下载区域长宽比例
-  _RatioStyle: {
-    width: "70vh",
-    height: "70vh",
-  },
+  // 展示区域长宽比例
+  _RatioStyle: DEFAULT_RATIO_STYLE,
   updateRatioStyle: (newratioStyle) =>
     set(() => ({ _RatioStyle: newratioStyle })),
+
+  // 下载区域长宽比例
+  _BottomLayerRatioStyle: DEFAULT_BOTTOM_LAYER_RATIO_STYLE,
+  updateBottomLayerRatioStyle: (newBottomLayerRatioStyle) =>
+    set(() => ({ _BottomLayerRatioStyle: newBottomLayerRatioStyle })),
 
   // 下载区域背景图
   _BackgroundImageStyle: {},

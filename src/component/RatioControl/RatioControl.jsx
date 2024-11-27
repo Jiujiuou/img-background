@@ -1,26 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { RadioGroup, Radio } from "@douyinfe/semi-ui";
 import Title from "@/component/Title/Title";
 import useStore from "@/store/index";
 import { RATIO_MAP } from "@/constant/index";
-import styles from "./index.module.less";
 import clsx from "clsx";
+import { DEFAULT_HEIGHT, DEFAULT_BOTTOM_LAYER_HEIGHT } from "@/constant/index";
+import styles from "./index.module.less";
 
 function RatioControl() {
-  const { updateRatioStyle } = useStore();
+  const { updateRatioStyle, updateBottomLayerRatioStyle } = useStore();
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handleRatioChange = (newRatio, index) => {
     setActiveIndex(index);
     const [widthRatio, heightRatio] = newRatio.split(":").map(Number);
-    const height = 76;
-    const width = (height * widthRatio) / heightRatio;
 
     updateRatioStyle({
-      width: `${width}vh`,
-      height: `${height}vh`,
+      width: `${(DEFAULT_HEIGHT * widthRatio) / heightRatio}vh`,
+      height: `${DEFAULT_HEIGHT}vh`,
+    });
+
+    updateBottomLayerRatioStyle({
+      width: `${(DEFAULT_BOTTOM_LAYER_HEIGHT * widthRatio) / heightRatio}px`,
+      height: `${DEFAULT_BOTTOM_LAYER_HEIGHT}px`,
     });
   };
+
   return (
     <>
       <Title title="下载比例" />

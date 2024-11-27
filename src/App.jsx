@@ -18,6 +18,9 @@ function App() {
   const _BackgroundImageStyle = useStore(
     (state) => state._BackgroundImageStyle
   );
+  const _BottomLayerRatioStyle = useStore(
+    (state) => state._BottomLayerRatioStyle
+  );
   const _FilterStyle = useStore((state) => state._FilterStyle);
   const _ImageBase64Url = useStore((state) => state._ImageBase64Url);
 
@@ -37,7 +40,6 @@ function App() {
           <div className={styles.downloadWrapper}>
             <div
               className={styles.hidden}
-              id={ID_DOWNLOAD_AREA}
               style={{
                 ..._RatioStyle,
               }}
@@ -67,6 +69,30 @@ function App() {
           <RatioControl />
           <FilterControl />
         </div>
+      </div>
+
+      {/* 此区域只为了下载高清图片使用 */}
+      <div
+        className={styles.bottomLayer}
+        style={{ ..._BottomLayerRatioStyle }}
+        id={ID_DOWNLOAD_AREA}
+      >
+        {_ImageBase64Url && (
+          <img
+            className={styles.image}
+            src={_ImageBase64Url}
+            alt=""
+            draggable="false"
+          />
+        )}
+        <div
+          className={styles.download}
+          style={{
+            ..._BottomLayerRatioStyle,
+            ..._BackgroundImageStyle,
+            ..._FilterStyle,
+          }}
+        />
       </div>
     </div>
   );
