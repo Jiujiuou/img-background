@@ -29,6 +29,10 @@ const useStore = create((set) => ({
     set(() => ({
       _ImageBase64Url: newImageBase64Url,
     })),
+
+  _ImageStyle: {},
+  updateImageStyle: (newImageStyle) =>
+    set(() => ({ _ImageStyle: newImageStyle })),
 }));
 
 export default useStore;

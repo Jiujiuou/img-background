@@ -5,6 +5,7 @@ import Header from "@/component/Header/Header";
 import RatioControl from "@/component/RatioControl/RatioControl";
 import ImageUpload from "@/component/ImageUpload/ImageUpload";
 import FilterControl from "@/component/FilterControl/FilterControl";
+import ImageControl from "./component/ImageControl/ImageControl";
 
 import { ID_DOWNLOAD_AREA, FILA_NAME } from "@/constant/index";
 
@@ -15,6 +16,7 @@ import styles from "./index.module.less";
 
 function App() {
   const _RatioStyle = useStore((state) => state._RatioStyle);
+  const _ImageStyle = useStore((state) => state._ImageStyle);
   const _BackgroundImageStyle = useStore(
     (state) => state._BackgroundImageStyle
   );
@@ -50,6 +52,7 @@ function App() {
                   src={_ImageBase64Url}
                   alt=""
                   draggable="false"
+                  style={{ ..._ImageStyle }}
                 />
               )}
               <div
@@ -68,6 +71,7 @@ function App() {
           <ImageUpload />
           <RatioControl />
           <FilterControl />
+          <ImageControl />
         </div>
       </div>
 
@@ -83,6 +87,7 @@ function App() {
             src={_ImageBase64Url}
             alt=""
             draggable="false"
+            style={{ ..._ImageStyle }}
           />
         )}
         <div
