@@ -9,7 +9,7 @@ import ImageControl from "./component/ImageControl/ImageControl";
 
 import { ID_DOWNLOAD_AREA } from "@/constant/index";
 
-import { getRatioStyle, handleDownloadImage } from "@/utils/index";
+import { getRatioStyle, downloadImagePlus } from "@/utils/index";
 
 import styles from "./index.module.less";
 
@@ -24,10 +24,14 @@ function App() {
       <div className={styles.content}>
         {/* 左侧预览 */}
         <div className={styles.preview}>
-          <Header download={handleDownloadImage} />
+          <Header download={downloadImagePlus} />
 
           <div className={styles.downloadWrapper}>
-            <div className={styles.hidden} style={getRatioStyle(_Ratio)}>
+            <div
+              className={styles.hidden}
+              style={getRatioStyle(_Ratio)}
+              id={ID_DOWNLOAD_AREA}
+            >
               {_ImageBase64Url && (
                 <img
                   alt=""
@@ -56,31 +60,6 @@ function App() {
           <FilterControl />
           <ImageControl />
         </div>
-      </div>
-
-      {/* 此区域只为了下载高清图片使用 */}
-      <div
-        className={styles.bottomLayer}
-        style={getRatioStyle(_Ratio, "down")}
-        id={ID_DOWNLOAD_AREA}
-      >
-        {_ImageBase64Url && (
-          <img
-            alt=""
-            draggable="false"
-            className={styles.image}
-            src={_ImageBase64Url}
-            style={{ ..._ImageStyle }}
-          />
-        )}
-        <div
-          className={styles.download}
-          style={{
-            ..._FilterStyle,
-            ...getRatioStyle(_Ratio, "down"),
-            backgroundImage: `url(${_ImageBase64Url})`,
-          }}
-        />
       </div>
     </div>
   );
