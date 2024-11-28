@@ -7,44 +7,11 @@ body {
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-
-  --semi-color-primary: #000 !important;
-  --semi-color-primary-hover: #000 !important;
-  --semi-color-primary-light-hover: #000 !important;
-  --semi-color-primary-hover: #000 !important;
-  --semi-color-primary-light-hover: #000 !important;
-  --semi-color-secondary-hover: #000 !important;
-  --semi-color-secondary-light-hover: #000 !important;
-  --semi-color-tertiary-hover: #000 !important;
-  --semi-color-tertiary-light-hover: #000 !important;
-  --semi-color-default-hover: #000 !important;
-  --semi-color-info-hover: #000 !important;
-  --semi-color-info-light-hover: #000 !important;
-  --semi-color-success-hover: #000 !important;
-  --semi-color-success-light-hover: #000 !important;
-  --semi-color-danger-hover: #000 !important;
-  --semi-color-danger-light-hover: #000 !important;
-  --semi-color-warning-hover: #000 !important;
-  --semi-color-warning-light-hover: #000 !important;
-  --semi-color-link-hover: #000 !important;
-  --semi-color-focus-border: #000 !important;
-  --semi-color-primary-active: #000 !important;
 }
 
 #root {
   width: 100vw;
   height: 100vh;
-}
-
-.semi-radio {
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: center;
-  align-items: center;
-}
-
-.semi-radio-addon {
-  font-weight: 600 !important;
 }
 
 :root {
