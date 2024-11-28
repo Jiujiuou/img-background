@@ -5,8 +5,6 @@ import Slider from "@/component/Slider/Slider";
 import styles from "./index.module.less";
 
 function ImageControl() {
-  const _RatioStyle = useStore((state) => state._RatioStyle);
-
   const [top, setTop] = useState(50);
   const [left, setLeft] = useState(50);
   const [size, setSize] = useState(50);
@@ -14,13 +12,12 @@ function ImageControl() {
   const { updateImageStyle } = useStore();
 
   useEffect(() => {
-    console.log("change", _RatioStyle);
     updateImageStyle({
       top: `${top}%`,
       left: `${left}%`,
       height: `${size}%`,
     });
-  }, [size, left, top, _RatioStyle, updateImageStyle]);
+  }, [size, left, top, updateImageStyle]);
 
   return (
     <div className={styles.wrapper}>

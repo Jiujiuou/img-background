@@ -1,26 +1,15 @@
 import { create } from "zustand";
-import {
-  DEFAULT_RATIO_STYLE,
-  DEFAULT_BOTTOM_LAYER_RATIO_STYLE,
-} from "@/constant/index";
 
 const useStore = create((set) => ({
-  // 展示区域长宽比例
-  _RatioStyle: DEFAULT_RATIO_STYLE,
-  updateRatioStyle: (newratioStyle) =>
-    set(() => ({ _RatioStyle: newratioStyle })),
+  _Ratio: {
+    width: 1,
+    height: 1,
+  },
+  updateRatio: (newRatio) => set(() => ({ _Ratio: newRatio })),
 
-  // 下载区域长宽比例
-  _BottomLayerRatioStyle: DEFAULT_BOTTOM_LAYER_RATIO_STYLE,
-  updateBottomLayerRatioStyle: (newBottomLayerRatioStyle) =>
-    set(() => ({ _BottomLayerRatioStyle: newBottomLayerRatioStyle })),
-
-  // 下载区域背景图
-  _BackgroundImageStyle: {},
-  updateBackgroundImageStyle: (newBackgroundStyle) =>
-    set(() => ({ _BackgroundImageStyle: newBackgroundStyle })),
-
-  _FilterStyle: {},
+  _FilterStyle: {
+    // filter: `blur(${blur}px) brightness(${brightness}%) saturate(${saturate}%)`,
+  },
   updateFilterStyle: (newFilterStyle) =>
     set(() => ({ _FilterStyle: newFilterStyle })),
 
@@ -30,7 +19,11 @@ const useStore = create((set) => ({
       _ImageBase64Url: newImageBase64Url,
     })),
 
-  _ImageStyle: {},
+  _ImageStyle: {
+    // top: `${top}%`,
+    // left: `${left}%`,
+    // height: `${size}%`,
+  },
   updateImageStyle: (newImageStyle) =>
     set(() => ({ _ImageStyle: newImageStyle })),
 }));

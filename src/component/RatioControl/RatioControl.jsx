@@ -3,25 +3,19 @@ import Title from "@/component/Title/Title";
 import useStore from "@/store/index";
 import { RATIO_MAP } from "@/constant/index";
 import clsx from "clsx";
-import { DEFAULT_HEIGHT, DEFAULT_BOTTOM_LAYER_HEIGHT } from "@/constant/index";
 import styles from "./index.module.less";
 
 function RatioControl() {
-  const { updateRatioStyle, updateBottomLayerRatioStyle } = useStore();
+  const { updateRatio } = useStore();
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handleRatioChange = (newRatio, index) => {
     setActiveIndex(index);
     const [widthRatio, heightRatio] = newRatio.split(":").map(Number);
 
-    updateRatioStyle({
-      width: `${(DEFAULT_HEIGHT * widthRatio) / heightRatio}vh`,
-      height: `${DEFAULT_HEIGHT}vh`,
-    });
-
-    updateBottomLayerRatioStyle({
-      width: `${(DEFAULT_BOTTOM_LAYER_HEIGHT * widthRatio) / heightRatio}px`,
-      height: `${DEFAULT_BOTTOM_LAYER_HEIGHT}px`,
+    updateRatio({
+      width: widthRatio,
+      height: heightRatio,
     });
   };
 

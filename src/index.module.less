@@ -30,7 +30,6 @@
 
         .hidden {
           overflow: hidden;
-          border-radius: var(--border-radius);
           box-shadow: 3px 3px 16px 0px rgba(0, 0, 0, 0.35);
           transition: width 0.7s ease-out, height 0.7s ease-out;
           position: relative;
@@ -43,6 +42,7 @@
             transform: translate(-50%, -50%);
             z-index: 1;
             pointer-events: none;
+            border-radius: var(--border-radius);
           }
 
           .download {
@@ -50,6 +50,8 @@
             height: 80vh;
             transition: width 0.7s ease-out, height 0.7s ease-out;
             scale: 1.1;
+            background-size: cover;
+            background-position: center;
           }
         }
       }
@@ -80,17 +82,17 @@
     z-index: -1;
     transition: width 0.7s ease-out, height 0.7s ease-out;
     overflow: hidden;
-    border-radius: var(--border-radius);
     box-shadow: 3px 3px 16px 0px rgba(0, 0, 0, 0.35);
 
     .image {
-      width: 50%;
+      height: 50%;
       position: absolute;
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
       z-index: 1;
       pointer-events: none;
+      border-radius: var(--border-radius);
     }
 
     .download {
@@ -98,6 +100,8 @@
       height: 80vh;
       transition: width 0.7s ease-out, height 0.7s ease-out;
       scale: 1.1;
+      background-size: cover;
+      background-position: center;
     }
   }
 }

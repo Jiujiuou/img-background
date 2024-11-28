@@ -7,66 +7,49 @@ import ImageUpload from "@/component/ImageUpload/ImageUpload";
 import FilterControl from "@/component/FilterControl/FilterControl";
 import ImageControl from "./component/ImageControl/ImageControl";
 
-import { ID_DOWNLOAD_AREA, FILA_NAME } from "@/constant/index";
+import { ID_DOWNLOAD_AREA } from "@/constant/index";
 
-import { toJpeg, toPng, toSvg } from "html-to-image";
-import download from "downloadjs";
+import { getRatioStyle, handleDownloadImage } from "@/utils/index";
 
 import styles from "./index.module.less";
 
 function App() {
-  const _RatioStyle = useStore((state) => state._RatioStyle);
+  const _Ratio = useStore((state) => state._Ratio);
   const _ImageStyle = useStore((state) => state._ImageStyle);
-  const _BackgroundImageStyle = useStore(
-    (state) => state._BackgroundImageStyle
-  );
-  const _BottomLayerRatioStyle = useStore(
-    (state) => state._BottomLayerRatioStyle
-  );
   const _FilterStyle = useStore((state) => state._FilterStyle);
   const _ImageBase64Url = useStore((state) => state._ImageBase64Url);
-
-  const handleDownloadImage = () => {
-    const element = document.getElementById(ID_DOWNLOAD_AREA);
-    toPng(element).then(function (dataUrl) {
-      download(dataUrl, FILA_NAME);
-    });
-  };
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.content}>
+        {/* 左侧预览 */}
         <div className={styles.preview}>
           <Header download={handleDownloadImage} />
 
           <div className={styles.downloadWrapper}>
-            <div
-              className={styles.hidden}
-              style={{
-                ..._RatioStyle,
-              }}
-            >
+            <div className={styles.hidden} style={getRatioStyle(_Ratio)}>
               {_ImageBase64Url && (
                 <img
-                  className={styles.image}
-                  src={_ImageBase64Url}
                   alt=""
                   draggable="false"
+                  className={styles.image}
+                  src={_ImageBase64Url}
                   style={{ ..._ImageStyle }}
                 />
               )}
               <div
                 className={styles.download}
                 style={{
-                  ..._RatioStyle,
-                  ..._BackgroundImageStyle,
+                  ...getRatioStyle(_Ratio),
                   ..._FilterStyle,
+                  backgroundImage: `url(${_ImageBase64Url})`,
                 }}
               />
             </div>
           </div>
         </div>
 
+        {/* 右侧控制 */}
         <div className={styles.control}>
           <ImageUpload />
           <RatioControl />
@@ -78,24 +61,24 @@ function App() {
       {/* 此区域只为了下载高清图片使用 */}
       <div
         className={styles.bottomLayer}
-        style={{ ..._BottomLayerRatioStyle }}
+        style={getRatioStyle(_Ratio, "down")}
         id={ID_DOWNLOAD_AREA}
       >
         {_ImageBase64Url && (
           <img
-            className={styles.image}
-            src={_ImageBase64Url}
             alt=""
             draggable="false"
+            className={styles.image}
+            src={_ImageBase64Url}
             style={{ ..._ImageStyle }}
           />
         )}
         <div
           className={styles.download}
           style={{
-            ..._BottomLayerRatioStyle,
-            ..._BackgroundImageStyle,
             ..._FilterStyle,
+            ...getRatioStyle(_Ratio, "down"),
+            backgroundImage: `url(${_ImageBase64Url})`,
           }}
         />
       </div>
