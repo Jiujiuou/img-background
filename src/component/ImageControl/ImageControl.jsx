@@ -15,7 +15,7 @@ function ImageControl() {
     updateImageStyle({
       top: `${top}%`,
       left: `${left}%`,
-      height: `${size}%`,
+      width: `${size}%`,
     });
   }, [size, left, top, updateImageStyle]);
 

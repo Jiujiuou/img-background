@@ -22,7 +22,7 @@ const useStore = create((set) => ({
   _ImageStyle: {
     // top: `${top}%`,
     // left: `${left}%`,
-    // height: `${size}%`,
+    // width: `${size}%`,
   },
   updateImageStyle: (newImageStyle) =>
     set(() => ({ _ImageStyle: newImageStyle })),
