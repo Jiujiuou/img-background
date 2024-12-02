@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node afterbuild.cjs",
+    "afterbuild": "node afterbuild.cjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },
