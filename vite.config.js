@@ -11,8 +11,7 @@ export default defineConfig({
     },
   },
   server: {
-    // 修改开发服务器的入口文件路径
-    open: "/template.html", // 在浏览器中打开 template.html
+    open: "/template.html",
     port: 3000, // 设置默认端口为 3000
   },
   build: {
