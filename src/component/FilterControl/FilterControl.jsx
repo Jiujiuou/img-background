@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useStore from "@/store/index";
 import Slider from "@/component/Slider/Slider";
+import InlineControl from "../InlineControl/InlineControl";
 
 import styles from "./index.module.less";
 
@@ -19,12 +20,11 @@ function FilterControl() {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.inline}>
-        <div className={styles.desc}>背景模糊</div>
+      <InlineControl label={"背景模糊"}>
         <Slider min={0} max={20} step={0.1} value={blur} onChange={setBlur} />
-      </div>
-      <div className={styles.inline}>
-        <div className={styles.desc}>背景亮度</div>
+      </InlineControl>
+
+      <InlineControl label={"背景亮度"}>
         <Slider
           min={50}
           max={150}
@@ -32,9 +32,9 @@ function FilterControl() {
           value={brightness}
           onChange={setBrightness}
         />
-      </div>
-      <div className={styles.inline}>
-        <div className={styles.desc}>背景饱和度</div>
+      </InlineControl>
+
+      <InlineControl label={"背景饱和度"}>
         <Slider
           min={0}
           max={200}
@@ -42,7 +42,7 @@ function FilterControl() {
           value={saturate}
           onChange={setSaturate}
         />
-      </div>
+      </InlineControl>
     </div>
   );
 }
