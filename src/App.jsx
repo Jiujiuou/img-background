@@ -6,6 +6,7 @@ import RatioControl from "@/component/RatioControl/RatioControl";
 import ImageUpload from "@/component/ImageUpload/ImageUpload";
 import FilterControl from "@/component/FilterControl/FilterControl";
 import ImageControl from "./component/ImageControl/ImageControl";
+import ImageRatioControl from "@/component/ImageRatioControl/ImageRatioControl";
 
 import { ID_DOWNLOAD_AREA } from "@/constant/index";
 
@@ -16,8 +17,16 @@ import styles from "./index.module.less";
 function App() {
   const _Ratio = useStore((state) => state._Ratio);
   const _ImageStyle = useStore((state) => state._ImageStyle);
+  const _ImageRatio = useStore((state) => state._ImageRatio);
   const _FilterStyle = useStore((state) => state._FilterStyle);
   const _ImageBase64Url = useStore((state) => state._ImageBase64Url);
+
+  const getImageRatioStyle = () => {
+    const { width, height } = _ImageRatio;
+    return {
+      aspectRatio: `${width} / ${height}`,
+    };
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -38,7 +47,7 @@ function App() {
                   draggable="false"
                   className={styles.image}
                   src={_ImageBase64Url}
-                  style={{ ..._ImageStyle }}
+                  style={{ ..._ImageStyle, ...getImageRatioStyle() }}
                 />
               )}
               <div
@@ -57,6 +66,7 @@ function App() {
         <div className={styles.control}>
           <ImageUpload />
           <RatioControl />
+          <ImageRatioControl />
           <FilterControl />
           <ImageControl />
         </div>

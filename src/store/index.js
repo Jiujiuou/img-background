@@ -7,6 +7,12 @@ const useStore = create((set) => ({
   },
   updateRatio: (newRatio) => set(() => ({ _Ratio: newRatio })),
 
+  _ImageRatio: {
+    width: 1,
+    height: 1,
+  },
+  updateImageRatio: (newRatio) => set(() => ({ _ImageRatio: newRatio })),
+
   _FilterStyle: {
     // filter: `blur(${blur}px) brightness(${brightness}%) saturate(${saturate}%)`,
   },
