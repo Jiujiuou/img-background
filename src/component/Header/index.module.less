@@ -15,21 +15,26 @@
     font-weight: bolder;
   }
 
-  .save {
+  .actions {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 6px 12px;
-    border-radius: 8px;
-    vertical-align: baseline;
-    cursor: pointer;
-    user-select: none;
-    background-color: var(--botton-background-color);
-    background-color: #18181b;
-    color: #fafafa;
-  }
-
-  .save:hover {
-    // background-color: var(--botton-hover-background-color);
+    gap: 10px;
+    
+    .button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 6px 12px;
+      border-radius: 8px;
+      vertical-align: baseline;
+      cursor: pointer;
+      user-select: none;
+      background-color: var(--botton-background-color);
+      background-color: #18181b;
+      color: #fafafa;
+      
+      &:hover {
+        opacity: 0.9;
+      }
+    }
   }
 }

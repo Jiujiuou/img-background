@@ -41,6 +41,11 @@ const useStore = create((set) => ({
   _BackgroundColor: "#000",
   updateBackgroundColor: (newBackgroundColor) =>
     set(() => ({ _BackgroundColor: newBackgroundColor })),
+    
+  // 批量更新配置
+  updateConfig: (config) => set(() => ({
+    ...config
+  })),
 }));
 
 export default useStore;
