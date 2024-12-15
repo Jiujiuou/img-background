@@ -10,6 +10,15 @@ import download from "downloadjs";
 
 export const getRatioStyle = (_Ratio, dom = "up") => {
   if (dom === "up") {
+    if (_Ratio.fixedHeight) {
+      const height = _Ratio.fixedHeight;
+      const numericHeight = parseInt(height);
+      const unit = height.replace(numericHeight, '');
+      return {
+        width: `${(numericHeight * _Ratio.width) / _Ratio.height}${unit}`,
+        height: height,
+      };
+    }
     return {
       width: `${(DEFAULT_HEIGHT * _Ratio.width) / _Ratio.height}vh`,
       height: `${DEFAULT_HEIGHT}vh`,

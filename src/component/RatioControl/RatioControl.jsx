@@ -11,11 +11,21 @@ function RatioControl() {
 
   const handleRatioChange = (newRatio, index) => {
     setActiveIndex(index);
-    const [widthRatio, heightRatio] = newRatio.split(":").map(Number);
+    
+    if (newRatio === "2.35:1") {
+      updateRatio({
+        width: 2.35,
+        height: 1,
+        fixedHeight: "50vh"
+      });
+      return;
+    }
 
+    const [widthRatio, heightRatio] = newRatio.split(":").map(Number);
     updateRatio({
       width: widthRatio,
       height: heightRatio,
+      fixedHeight: null
     });
   };
 
