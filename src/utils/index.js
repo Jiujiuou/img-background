@@ -8,12 +8,24 @@ import {
 import { toPng, toCanvas } from "html-to-image";
 import download from "downloadjs";
 
+export const getBackgroundStyle = (
+  _BackgroundType,
+  _ImageBase64Url,
+  _BackgroundColor
+) => {
+  if (_BackgroundType === "图片背景") {
+    return { backgroundImage: `url(${_ImageBase64Url})` };
+  } else {
+    return { backgroundColor: _BackgroundColor };
+  }
+};
+
 export const getRatioStyle = (_Ratio, dom = "up") => {
   if (dom === "up") {
     if (_Ratio.fixedHeight) {
       const height = _Ratio.fixedHeight;
       const numericHeight = parseInt(height);
-      const unit = height.replace(numericHeight, '');
+      const unit = height.replace(numericHeight, "");
       return {
         width: `${(numericHeight * _Ratio.width) / _Ratio.height}${unit}`,
         height: height,

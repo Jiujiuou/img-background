@@ -29,6 +29,8 @@ export const IMAGE_RATIO_MAP = [
   "2.35:1",
 ];
 
+export const BACKGROUND_TYPE_MAP = ["图片背景", "颜色背景"];
+
 export const DEFAULT_BOTTOM_LAYER_HEIGHT = 1000;
 export const DEFAULT_BOTTOM_LAYER_RATIO_STYLE = {
   width: `${DEFAULT_BOTTOM_LAYER_HEIGHT}px`,

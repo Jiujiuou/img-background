@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { BACKGROUND_TYPE_MAP } from "@/constant/index";
 
 const useStore = create((set) => ({
   _Ratio: {
@@ -32,6 +33,14 @@ const useStore = create((set) => ({
   },
   updateImageStyle: (newImageStyle) =>
     set(() => ({ _ImageStyle: newImageStyle })),
+
+  _BackgroundType: BACKGROUND_TYPE_MAP[0],
+  updateBackgroundType: (newBackgroundType) =>
+    set(() => ({ _BackgroundType: newBackgroundType })),
+
+  _BackgroundColor: "#000",
+  updateBackgroundColor: (newBackgroundColor) =>
+    set(() => ({ _BackgroundColor: newBackgroundColor })),
 }));
 
 export default useStore;
