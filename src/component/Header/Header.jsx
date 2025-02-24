@@ -5,7 +5,7 @@ import { Message, Button } from "@arco-design/web-react";
 
 function Header({ download }) {
   const store = useStore();
-
+  const _Ratio = store._Ratio;
   // 保存当前配置
   const handleSaveConfig = () => {
     const config = {
@@ -45,7 +45,7 @@ function Header({ download }) {
         <div className={style.button} onClick={handleSaveConfig}>
           保存配置
         </div>
-        <div className={style.button} onClick={download}>
+        <div className={style.button} onClick={() => download(_Ratio)}>
           下载
         </div>
       </div>

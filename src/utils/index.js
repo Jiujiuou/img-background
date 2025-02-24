@@ -2,7 +2,6 @@ import {
   DEFAULT_HEIGHT,
   DEFAULT_BOTTOM_LAYER_HEIGHT,
   ID_DOWNLOAD_AREA,
-  FILA_NAME,
 } from "@/constant/index";
 
 import { toPng, toCanvas } from "html-to-image";
@@ -82,7 +81,7 @@ export const downloadImage = () => {
   }, 500); // 确保样式生效
 };
 
-export const downloadImagePlus = async () => {
+export const downloadImagePlus = async (_Ratio) => {
   const element = document.getElementById(ID_DOWNLOAD_AREA); // 替换为你的预览区域的 ID
 
   const rect = element.getBoundingClientRect();
@@ -103,6 +102,7 @@ export const downloadImagePlus = async () => {
     },
   }).then((canvas) => {
     const dataUrl = canvas.toDataURL("image/png");
-    download(dataUrl, FILA_NAME);
+    const fileName = `JiujiuTool-${_Ratio.width}-${_Ratio.height}.png`;
+    download(dataUrl, fileName);
   });
 };
