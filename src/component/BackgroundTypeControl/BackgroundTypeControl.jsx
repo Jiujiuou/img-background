@@ -5,7 +5,7 @@ import { BACKGROUND_TYPE_MAP } from "@/constant/index";
 import clsx from "clsx";
 import styles from "./index.module.less";
 
-function RatioControl() {
+function BackgroundTypeControl() {
   const [activeIndex, setActiveIndex] = useState(0);
   const { updateBackgroundType } = useStore();
 
@@ -36,4 +36,4 @@ function RatioControl() {
   );
 }
 
-export default RatioControl;
+export default BackgroundTypeControl;
