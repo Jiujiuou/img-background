@@ -1,0 +1,22 @@
+.control {
+  font-weight: bold;
+  box-sizing: border-box;
+  padding: 20px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid var(--border-color);
+  user-select: none;
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
+
+  .radioGroup {
+    display: flex;
+    flex-direction: row;
+  }
+}

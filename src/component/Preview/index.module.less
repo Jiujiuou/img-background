@@ -1,0 +1,41 @@
+.preview {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  .downloadWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+
+    .hidden {
+      overflow: hidden;
+      box-shadow: 3px 3px 16px 0px rgba(0, 0, 0, 0.35);
+      transition: width 0.7s ease-out, height 0.7s ease-out;
+      position: relative;
+
+      .image {
+        width: 50%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        pointer-events: none;
+        object-fit: cover;
+        transition: aspect-ratio 0.7s ease-out;
+      }
+
+      .download {
+        width: 80vh;
+        height: 80vh;
+        transition: width 0.7s ease-out, height 0.7s ease-out;
+        scale: 1.1;
+        background-size: cover;
+        background-position: center;
+      }
+    }
+  }
+}

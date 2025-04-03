@@ -15,71 +15,6 @@
     display: flex;
     flex-direction: row;
     flex: 1;
-
-    .preview {
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-
-      .downloadWrapper {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        flex: 1;
-
-        .hidden {
-          overflow: hidden;
-          box-shadow: 3px 3px 16px 0px rgba(0, 0, 0, 0.35);
-          transition: width 0.7s ease-out, height 0.7s ease-out;
-          position: relative;
-
-          .image {
-            width: 50%;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1;
-            pointer-events: none;
-            object-fit: cover;
-            transition: aspect-ratio 0.7s ease-out;
-          }
-
-          .download {
-            width: 80vh;
-            height: 80vh;
-            transition: width 0.7s ease-out, height 0.7s ease-out;
-            scale: 1.1;
-            background-size: cover;
-            background-position: center;
-          }
-        }
-      }
-    }
-
-    .control {
-      font-weight: bold;
-      box-sizing: border-box;
-      padding: 20px;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      border-left: 1px solid var(--border-color);
-      user-select: none;
-      overflow-y: scroll;
-      scrollbar-width: none;  /* Firefox */
-      -ms-overflow-style: none;  /* IE and Edge */
-      
-      &::-webkit-scrollbar {
-        display: none;  /* Chrome, Safari and Opera */
-      }
-
-      .radioGroup {
-        display: flex;
-        flex-direction: row;
-      }
-    }
   }
 
   .bottomLayer {
@@ -114,8 +49,4 @@
       background-position: center;
     }
   }
-}
-
-.semi-radio-addon {
-  font-weight: normal !important;
 }
