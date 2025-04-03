@@ -8,7 +8,7 @@
   user-select: none;
 }
 
-.rack {
+.track {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -37,4 +37,31 @@
 
 .thumb:active {
   cursor: pointer;
+}
+
+.valueTooltip {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #474748;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  user-select: none;
+  pointer-events: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.valueTooltip::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px 5px 0;
+  border-style: solid;
+  border-color: #474748 transparent transparent transparent;
 }

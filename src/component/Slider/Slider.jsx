@@ -1,7 +1,10 @@
 import React, { useState, useRef } from "react";
 import styles from "./index.module.css";
+
 const Slider = ({ min = 0, max = 100, step = 1, value, onChange }) => {
   const [currentValue, setCurrentValue] = useState(value || min);
+  const [isDragging, setIsDragging] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
   const sliderRef = useRef(null);
 
   const handleSliderClick = (e) => {
@@ -31,20 +34,38 @@ const Slider = ({ min = 0, max = 100, step = 1, value, onChange }) => {
   };
 
   const handleMouseDown = () => {
+    setIsDragging(true);
     document.addEventListener("mousemove", handleThumbDrag);
     document.addEventListener(
       "mouseup",
       () => {
         document.removeEventListener("mousemove", handleThumbDrag);
+        setIsDragging(false);
       },
       { once: true }
     );
   };
 
+  // 格式化显示的数值，避免过长的小数
+  const formatValue = (value) => {
+    // 判断是否为整数
+    if (Number.isInteger(value)) {
+      return value;
+    }
+    // 非整数则保留最多1位小数
+    return Number(value.toFixed(1));
+  };
+
   const thumbPosition = ((currentValue - min) / (max - min)) * 100;
 
   return (
-    <div className={styles.slider} ref={sliderRef} onClick={handleSliderClick}>
+    <div
+      className={styles.slider}
+      ref={sliderRef}
+      onClick={handleSliderClick}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+    >
       <div className={styles.track}>
         <div
           className={styles.fill}
@@ -55,7 +76,11 @@ const Slider = ({ min = 0, max = 100, step = 1, value, onChange }) => {
         className={styles.thumb}
         style={{ left: `${thumbPosition}%` }}
         onMouseDown={handleMouseDown}
-      ></div>
+      >
+        {(isDragging || isHovering) && (
+          <div className={styles.valueTooltip}>{formatValue(currentValue)}</div>
+        )}
+      </div>
     </div>
   );
 };
