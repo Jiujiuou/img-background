@@ -9,19 +9,22 @@ import styles from "./index.module.less";
 function FilterControl() {
   const _BackgroundType = useStore((state) => state._BackgroundType);
   const _BackgroundColor = useStore((state) => state._BackgroundColor);
-  const { updateBackgroundColor } = useStore();
-  const { updateFilterStyle } = useStore();
+  const { updateBackgroundColor, updateFilterControlValues } = useStore();
 
-  const [blur, setBlur] = useState(10);
-  const [brightness, setBrightness] = useState(100);
-  const [saturate, setSaturate] = useState(100);
+  // 独立订阅每个滤镜控制值，优化性能
+  const blur = useStore((state) => state._FilterControlValues.blur);
+  const brightness = useStore((state) => state._FilterControlValues.brightness);
+  const saturate = useStore((state) => state._FilterControlValues.saturate);
+
+  // 更新滤镜控制值的函数
+  const setBlur = (value) => updateFilterControlValues({ blur: value });
+  const setBrightness = (value) =>
+    updateFilterControlValues({ brightness: value });
+  const setSaturate = (value) => updateFilterControlValues({ saturate: value });
 
   const [background, setBackground] = useState(_BackgroundColor);
-  useEffect(() => {
-    updateFilterStyle({
-      filter: `blur(${blur}px) brightness(${brightness}%) saturate(${saturate}%)`,
-    });
-  }, [blur, brightness, saturate, updateFilterStyle]);
+
+  // 🚀 滤镜CSS样式现在由useFilterStyle hook自动计算，无需手动更新
 
   const handleBackgroundColorChange = (newColor) => {
     setBackground(newColor);

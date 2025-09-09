@@ -45,19 +45,25 @@ const useStore = create((set) => ({
   updateImageRatio: (newRatio) => set(() => ({ _ImageRatio: newRatio })),
 
   /**
-   * 图片背景滤镜样式
-   * 可包含模糊、亮度、饱和度等CSS滤镜属性
-   * 例如：{filter: 'blur(5px) brightness(120%) saturate(150%)'}
+   * 背景滤镜控制参数
+   * 用于与右侧滤镜控制面板同步
    */
-  _FilterStyle: {
-    // filter: `blur(${blur}px) brightness(${brightness}%) saturate(${saturate}%)`,
+  _FilterControlValues: {
+    blur: 10, // 模糊度 0-20
+    brightness: 100, // 亮度 50-150
+    saturate: 100, // 饱和度 0-200
   },
   /**
-   * 更新滤镜样式
-   * @param {object} newFilterStyle - 新的滤镜样式对象
+   * 更新背景滤镜控制值
+   * @param {object} newFilterValues - 新的滤镜控制值对象
    */
-  updateFilterStyle: (newFilterStyle) =>
-    set(() => ({ _FilterStyle: newFilterStyle })),
+  updateFilterControlValues: (newFilterValues) =>
+    set((state) => ({
+      _FilterControlValues: {
+        ...state._FilterControlValues,
+        ...newFilterValues,
+      },
+    })),
 
   /**
    * 上传图片的Base64编码URL

@@ -11,8 +11,8 @@ function Header({ download }) {
     const config = {
       _Ratio: store._Ratio,
       _ImageRatio: store._ImageRatio,
-      _FilterStyle: store._FilterStyle,
-      _ImageControlValues: store._ImageControlValues, // 🚀 使用单一状态源
+      _FilterControlValues: store._FilterControlValues, // 🚀 使用滤镜控制值
+      _ImageControlValues: store._ImageControlValues, // 🚀 使用图片控制值
       _BackgroundType: store._BackgroundType,
       _BackgroundColor: store._BackgroundColor,
     };

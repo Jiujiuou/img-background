@@ -2,6 +2,7 @@ import React from "react";
 import useStore from "@/store";
 import Header from "@/component/Header/Header";
 import DraggableImage from "@/component/DraggableImage";
+import { useFilterStyle } from "@/hooks/useFilterStyle";
 import { ID_DOWNLOAD_AREA } from "@/constant/index";
 import {
   getRatioStyle,
@@ -12,7 +13,7 @@ import styles from "./index.module.less";
 
 function Preview() {
   const _Ratio = useStore((state) => state._Ratio);
-  const _FilterStyle = useStore((state) => state._FilterStyle);
+  const _FilterStyle = useFilterStyle(); // 🚀 使用计算的滤镜样式
   const _ImageBase64Url = useStore((state) => state._ImageBase64Url);
   const _BackgroundType = useStore((state) => state._BackgroundType);
   const _BackgroundColor = useStore((state) => state._BackgroundColor);
