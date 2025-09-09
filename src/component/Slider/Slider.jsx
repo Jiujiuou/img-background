@@ -1,8 +1,15 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styles from "./index.module.css";
 
 const Slider = ({ min = 0, max = 100, step = 1, value, onChange }) => {
   const [currentValue, setCurrentValue] = useState(value || min);
+
+  // 同步外部value变化到内部状态
+  useEffect(() => {
+    if (value !== undefined && value !== currentValue) {
+      setCurrentValue(value);
+    }
+  }, [value, currentValue]);
   const [isDragging, setIsDragging] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
   const sliderRef = useRef(null);
@@ -46,13 +53,20 @@ const Slider = ({ min = 0, max = 100, step = 1, value, onChange }) => {
     );
   };
 
-  // 格式化显示的数值，避免过长的小数
+  // 格式化显示的数值，根据step决定精度
   const formatValue = (value) => {
-    // 判断是否为整数
-    if (Number.isInteger(value)) {
-      return value;
+    // 根据step决定小数位数
+    if (step >= 1) {
+      return Math.round(value);
+    } else if (step >= 0.5) {
+      // 步长0.5时：整数显示为整数，半数显示为.5
+      return value % 1 === 0 ? Math.round(value) : Number(value.toFixed(1));
+    } else if (step >= 0.1) {
+      return Number(value.toFixed(1));
+    } else if (step >= 0.01) {
+      return Number(value.toFixed(2));
     }
-    // 非整数则保留最多1位小数
+    // 默认保留1位小数
     return Number(value.toFixed(1));
   };
 

@@ -74,23 +74,27 @@ const useStore = create((set) => ({
     })),
 
   /**
-   * 图片位置和大小样式
-   * 控制图片在画布中的位置和显示大小
-   * 可包含top、left、width等CSS属性
+   * 图片控制的用户友好位置值 (0-100)
+   * 用于与右侧控制面板的滑动条同步
    */
-  _ImageStyle: {
-    top: "25%",
-    left: "25%",
-    width: "50%",
-    borderRadius: "8px",
-    boxShadow: "5px 6px 16px 0px rgba(0, 0, 0, 0.85)",
+  _ImageControlValues: {
+    top: 50, // 垂直位置 0-100
+    left: 50, // 水平位置 0-100
+    size: 50, // 图片大小 0-100
+    radius: 8, // 圆角大小 0-30
+    showShadow: true, // 是否显示阴影
   },
   /**
-   * 更新图片位置和大小样式
-   * @param {object} newImageStyle - 新的图片样式对象
+   * 更新图片控制值
+   * @param {object} newControlValues - 新的控制值对象
    */
-  updateImageStyle: (newImageStyle) =>
-    set(() => ({ _ImageStyle: newImageStyle })),
+  updateImageControlValues: (newControlValues) =>
+    set((state) => ({
+      _ImageControlValues: {
+        ...state._ImageControlValues,
+        ...newControlValues,
+      },
+    })),
 
   /**
    * 背景类型

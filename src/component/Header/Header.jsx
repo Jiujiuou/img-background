@@ -12,7 +12,7 @@ function Header({ download }) {
       _Ratio: store._Ratio,
       _ImageRatio: store._ImageRatio,
       _FilterStyle: store._FilterStyle,
-      _ImageStyle: store._ImageStyle,
+      _ImageControlValues: store._ImageControlValues, // 🚀 使用单一状态源
       _BackgroundType: store._BackgroundType,
       _BackgroundColor: store._BackgroundColor,
     };

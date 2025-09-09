@@ -1,0 +1,25 @@
+.image {
+  position: absolute;
+  z-index: 1;
+  pointer-events: auto;
+  object-fit: cover;
+  transition: all 0.2s ease-out;
+  cursor: grab;
+  user-select: none;
+
+  &:hover {
+    outline: 2px solid rgba(59, 130, 246, 0.3);
+    outline-offset: 2px;
+  }
+
+  &.dragging {
+    cursor: grabbing;
+    z-index: 1000;
+    filter: brightness(1.1);
+    transform: scale(1.02);
+    outline: 2px solid rgba(59, 130, 246, 0.6);
+    outline-offset: 2px;
+    transition: filter 0.1s ease-out, transform 0.1s ease-out,
+      outline 0.1s ease-out;
+  }
+}
