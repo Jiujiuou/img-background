@@ -79,9 +79,11 @@ const useStore = create((set) => ({
    * 可包含top、left、width等CSS属性
    */
   _ImageStyle: {
-    // top: `${top}%`,
-    // left: `${left}%`,
-    // width: `${size}%`,
+    top: "25%",
+    left: "25%",
+    width: "50%",
+    borderRadius: "8px",
+    boxShadow: "5px 6px 16px 0px rgba(0, 0, 0, 0.85)",
   },
   /**
    * 更新图片位置和大小样式

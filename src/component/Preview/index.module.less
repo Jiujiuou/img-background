@@ -17,15 +17,12 @@
       position: relative;
 
       .image {
-        width: 50%;
         position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
         z-index: 1;
         pointer-events: none;
         object-fit: cover;
-        transition: aspect-ratio 0.7s ease-out;
+        transition: all 0.7s ease-out;
+        /* 位置和大小由JavaScript动态控制，不设置默认值 */
       }
 
       .download {
