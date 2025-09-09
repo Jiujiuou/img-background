@@ -19,6 +19,8 @@ function ImageControl() {
   const size = useStore((state) => state._ImageControlValues.size);
   const radius = useStore((state) => state._ImageControlValues.radius);
   const showShadow = useStore((state) => state._ImageControlValues.showShadow);
+  const _ImageRatio = useStore((state) => state._ImageRatio); // 🚀 获取图片宽高比
+  const _Ratio = useStore((state) => state._Ratio); // 🚀 获取容器宽高比
 
   // 更新控制值的函数
   const setTop = (value) => updateImageControlValues({ top: value });
@@ -26,10 +28,24 @@ function ImageControl() {
   const setSize = (value) => updateImageControlValues({ size: value });
   const setRadius = (value) => updateImageControlValues({ radius: value });
 
-  // 基于图片大小计算动态边界
-  const bounds = useMemo(() => {
-    return BOUNDARY_CONFIG.calculateBounds(size);
-  }, [size]);
+  // 🚀 基于图片大小、图片宽高比和容器宽高比计算动态边界
+  const horizontalBounds = useMemo(() => {
+    return BOUNDARY_CONFIG.calculateBounds(
+      size,
+      _ImageRatio,
+      "horizontal",
+      _Ratio
+    );
+  }, [size, _ImageRatio, _Ratio]);
+
+  const verticalBounds = useMemo(() => {
+    return BOUNDARY_CONFIG.calculateBounds(
+      size,
+      _ImageRatio,
+      "vertical",
+      _Ratio
+    );
+  }, [size, _ImageRatio, _Ratio]);
 
   const changeShadowVisibleStatus = (isOn) => {
     updateImageControlValues({ showShadow: isOn });

@@ -7,7 +7,8 @@ import useStore from "@/store";
 import { BOUNDARY_CONFIG, clampPosition } from "@/constant/boundary";
 import { useImageStyle } from "./useImageStyle";
 export const useDrag = (imageRef) => {
-  const { updateImageControlValues, _ImageControlValues } = useStore();
+  const { updateImageControlValues, _ImageControlValues, _ImageRatio, _Ratio } =
+    useStore();
   const _ImageStyle = useImageStyle(); // 获取计算的CSS样式
   const [isDragging, setIsDragging] = useState(false);
 
@@ -29,21 +30,37 @@ export const useDrag = (imageRef) => {
   }, [_ImageControlValues]);
 
   // 将实际CSS位置转换为用户友好值(0-100)
-  const convertToUserValue = useCallback((actualPosition, imageSize) => {
-    const bounds = BOUNDARY_CONFIG.calculateBounds(imageSize);
-    if (bounds.max === bounds.min) return 50;
-    const userValue =
-      ((actualPosition - bounds.min) / (bounds.max - bounds.min)) * 100;
-    return Math.max(0, Math.min(100, userValue));
-  }, []);
+  const convertToUserValue = useCallback(
+    (actualPosition, imageSize, direction) => {
+      const bounds = BOUNDARY_CONFIG.calculateBounds(
+        imageSize,
+        _ImageRatio,
+        direction,
+        _Ratio
+      );
+      if (bounds.max === bounds.min) return 50;
+      const userValue =
+        ((actualPosition - bounds.min) / (bounds.max - bounds.min)) * 100;
+      return Math.max(0, Math.min(100, userValue));
+    },
+    [_ImageRatio, _Ratio]
+  );
 
   // 将用户友好值(0-100)转换为实际CSS位置
-  const convertToActualPosition = useCallback((userValue, imageSize) => {
-    const bounds = BOUNDARY_CONFIG.calculateBounds(imageSize);
-    const actualPosition =
-      bounds.min + (userValue / 100) * (bounds.max - bounds.min);
-    return Math.max(bounds.min, Math.min(bounds.max, actualPosition));
-  }, []);
+  const convertToActualPosition = useCallback(
+    (userValue, imageSize, direction) => {
+      const bounds = BOUNDARY_CONFIG.calculateBounds(
+        imageSize,
+        _ImageRatio,
+        direction,
+        _Ratio
+      );
+      const actualPosition =
+        bounds.min + (userValue / 100) * (bounds.max - bounds.min);
+      return Math.max(bounds.min, Math.min(bounds.max, actualPosition));
+    },
+    [_ImageRatio, _Ratio]
+  );
 
   // 获取当前图片位置
   const getCurrentPosition = useCallback(() => {
@@ -72,8 +89,8 @@ export const useDrag = (imageRef) => {
 
       // 将CSS位置转换为用户友好值
       const imageSize = getCurrentSize();
-      const userLeft = convertToUserValue(cssLeft, imageSize);
-      const userTop = convertToUserValue(cssTop, imageSize);
+      const userLeft = convertToUserValue(cssLeft, imageSize, "horizontal");
+      const userTop = convertToUserValue(cssTop, imageSize, "vertical");
 
       // 应用0-100边界限制
       const clampedLeft = Math.max(0, Math.min(100, userLeft));
