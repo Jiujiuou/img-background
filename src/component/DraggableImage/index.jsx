@@ -10,7 +10,7 @@ import styles from "./index.module.less";
 
 function DraggableImage() {
   const imageRef = useRef(null);
-  const _ImageStyle = useImageStyle(); // 🚀 使用计算的CSS样式
+  const _ImageStyle = useImageStyle(); // 🚀 获取统一的width样式
   const _ImageRatio = useStore((state) => state._ImageRatio);
   const _ImageBase64Url = useStore((state) => state._ImageBase64Url);
 

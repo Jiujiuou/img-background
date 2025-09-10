@@ -6,6 +6,7 @@ import { useState, useCallback, useRef, useEffect } from "react";
 import useStore from "@/store";
 import { BOUNDARY_CONFIG, clampPosition } from "@/constant/boundary";
 import { useImageStyle } from "./useImageStyle";
+import { calculateActualWidth } from "@/utils/imageSize";
 export const useDrag = (imageRef) => {
   const { updateImageControlValues, _ImageControlValues, _ImageRatio, _Ratio } =
     useStore();
@@ -29,11 +30,20 @@ export const useDrag = (imageRef) => {
     return _ImageControlValues.size;
   }, [_ImageControlValues]);
 
+  // 🚀 使用公共函数计算实际宽度
+  const getActualWidth = useCallback(
+    (size) => {
+      return calculateActualWidth(size, _ImageRatio, _Ratio);
+    },
+    [_ImageRatio, _Ratio]
+  );
+
   // 将实际CSS位置转换为用户友好值(0-100)
   const convertToUserValue = useCallback(
     (actualPosition, imageSize, direction) => {
+      const actualWidth = getActualWidth(imageSize);
       const bounds = BOUNDARY_CONFIG.calculateBounds(
-        imageSize,
+        actualWidth,
         _ImageRatio,
         direction,
         _Ratio
@@ -43,14 +53,15 @@ export const useDrag = (imageRef) => {
         ((actualPosition - bounds.min) / (bounds.max - bounds.min)) * 100;
       return Math.max(0, Math.min(100, userValue));
     },
-    [_ImageRatio, _Ratio]
+    [_ImageRatio, _Ratio, getActualWidth]
   );
 
   // 将用户友好值(0-100)转换为实际CSS位置
   const convertToActualPosition = useCallback(
     (userValue, imageSize, direction) => {
+      const actualWidth = getActualWidth(imageSize);
       const bounds = BOUNDARY_CONFIG.calculateBounds(
-        imageSize,
+        actualWidth,
         _ImageRatio,
         direction,
         _Ratio
@@ -59,7 +70,7 @@ export const useDrag = (imageRef) => {
         bounds.min + (userValue / 100) * (bounds.max - bounds.min);
       return Math.max(bounds.min, Math.min(bounds.max, actualPosition));
     },
-    [_ImageRatio, _Ratio]
+    [_ImageRatio, _Ratio, getActualWidth]
   );
 
   // 获取当前图片位置

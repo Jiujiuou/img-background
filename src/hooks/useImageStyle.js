@@ -6,6 +6,10 @@
 import { useMemo } from "react";
 import useStore from "@/store";
 import { BOUNDARY_CONFIG } from "@/constant/boundary";
+import {
+  calculateActualWidth,
+  createUnifiedWidthStyle,
+} from "@/utils/imageSize";
 
 /**
  * 将用户友好值转换为CSS实际位置
@@ -40,17 +44,21 @@ export const useImageStyle = () => {
   const _Ratio = useStore((state) => state._Ratio); // 🚀 获取容器宽高比
 
   return useMemo(() => {
-    // 🚀 分别计算水平和垂直方向的实际CSS位置
+    // 🚀 使用统一width样式，配合aspect-ratio实现平滑过渡
+    const sizeStyle = createUnifiedWidthStyle(size, _ImageRatio, _Ratio);
+    const actualWidth = calculateActualWidth(size, _ImageRatio, _Ratio);
+
+    // 🚀 使用实际宽度进行位置计算
     const actualTop = convertToActualPosition(
       top,
-      size,
+      actualWidth,
       _ImageRatio,
       "vertical",
       _Ratio
     );
     const actualLeft = convertToActualPosition(
       left,
-      size,
+      actualWidth,
       _ImageRatio,
       "horizontal",
       _Ratio
@@ -59,7 +67,7 @@ export const useImageStyle = () => {
     const style = {
       top: `${actualTop}%`,
       left: `${actualLeft}%`,
-      width: `${size}%`,
+      ...sizeStyle, // 🚀 统一的width样式
       borderRadius: `${radius}px`,
     };
 
