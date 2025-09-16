@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useMemo, useCallback } from "react";
 import useStore from "@/store/index";
 import Slider from "@/component/Slider/Slider";
-import Switch from "@/component/Switch/Switch";
 import InlineControl from "../InlineControl/InlineControl";
 import { BOUNDARY_CONFIG, clampPosition } from "@/constant/boundary";
 
@@ -18,7 +17,6 @@ function ImageControl() {
   const left = useStore((state) => state._ImageControlValues.left);
   const size = useStore((state) => state._ImageControlValues.size);
   const radius = useStore((state) => state._ImageControlValues.radius);
-  const showShadow = useStore((state) => state._ImageControlValues.showShadow);
   const _ImageRatio = useStore((state) => state._ImageRatio); // 🚀 获取图片宽高比
   const _Ratio = useStore((state) => state._Ratio); // 🚀 获取容器宽高比
 
@@ -47,10 +45,6 @@ function ImageControl() {
     );
   }, [size, _ImageRatio, _Ratio]);
 
-  const changeShadowVisibleStatus = (isOn) => {
-    updateImageControlValues({ showShadow: isOn });
-  };
-
   // 🚀 CSS样式现在由useImageStyle hook自动计算，无需手动更新
 
   return (
@@ -69,10 +63,6 @@ function ImageControl() {
 
       <InlineControl label={"圆角大小"}>
         <Slider min={0} max={30} step={1} value={radius} onChange={setRadius} />
-      </InlineControl>
-
-      <InlineControl label={"阴影控制"}>
-        <Switch checked={showShadow} onChange={changeShadowVisibleStatus} />
       </InlineControl>
     </div>
   );

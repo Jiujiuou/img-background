@@ -5,14 +5,16 @@ import ImageRatioControl from "@/component/ImageRatioControl/ImageRatioControl";
 import BackgroundTypeControl from "@/component/BackgroundTypeControl/BackgroundTypeControl";
 import FilterControl from "@/component/FilterControl/FilterControl";
 import ImageControl from "@/component/ImageControl/ImageControl";
+import ShadowControl from "@/component/ShadowControl/ShadowControl";
 import CollapsiblePanel from "@/component/CollapsiblePanel/CollapsiblePanel";
 import Title from "@/component/Title/Title";
 import styles from "./index.module.less";
 
 function ControlPanel() {
   // 受控组件状态管理
-  const [ratioAdjustExpanded, setRatioAdjustExpanded] = useState(true);
+  const [ratioAdjustExpanded, setRatioAdjustExpanded] = useState(false);
   const [imageAdjustExpanded, setImageAdjustExpanded] = useState(false);
+  const [shadowExpanded, setShadowExpanded] = useState(false);
   const [backgroundExpanded, setBackgroundExpanded] = useState(false);
 
   return (
@@ -39,6 +41,15 @@ function ControlPanel() {
           onToggle={setImageAdjustExpanded}
         >
           <ImageControl />
+        </CollapsiblePanel>
+
+        {/* 阴影控制面板 */}
+        <CollapsiblePanel
+          title="阴影控制"
+          expanded={shadowExpanded}
+          onToggle={setShadowExpanded}
+        >
+          <ShadowControl />
         </CollapsiblePanel>
 
         {/* 背景设置面板 */}
