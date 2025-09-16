@@ -1,7 +1,7 @@
 import React from "react";
 import clsx from "clsx";
 import styles from "./index.module.less";
-import ChevronDown from "@/icons/ChevronDown";
+import ChevronDown from "@/assets/icons/ChevronDown";
 
 /**
  * 受控模式的折叠面板组件
