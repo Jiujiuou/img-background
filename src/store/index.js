@@ -89,6 +89,19 @@ const useStore = create((set) => ({
     size: 50, // 图片大小 0-100
     radius: 8, // 圆角大小 0-30
     showShadow: true, // 是否显示阴影
+
+    // 🌟 光源控制属性
+    lightX: 0, // 光源水平位置 0-100 (相对于光源控制面板)
+    lightY: 0, // 光源垂直位置 0-100 (相对于光源控制面板)
+
+    // 🎯 阴影属性 (由光源位置计算得出)
+    shadowOffsetX: -6, // 阴影X轴偏移 (px)
+    shadowOffsetY: 6, // 阴影Y轴偏移 (px)
+    shadowBlur: 16, // 阴影模糊半径 (px)
+    shadowSpread: 0, // 阴影扩散半径 (px)
+    shadowColor: "rgba(0, 0, 0, 0.85)", // 阴影颜色
+    shadowIntensity: 0.3, // 阴影强度 0-1 (基于光源距离)
+    shadowInset: false, // 是否为内阴影
   },
   /**
    * 更新图片控制值

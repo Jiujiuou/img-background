@@ -37,9 +37,19 @@ const convertToActualPosition = (
  * @returns {Object} CSS样式对象
  */
 export const useImageStyle = () => {
-  const { top, left, size, radius, showShadow } = useStore(
-    (state) => state._ImageControlValues
-  );
+  const {
+    top,
+    left,
+    size,
+    radius,
+    showShadow,
+    shadowOffsetX,
+    shadowOffsetY,
+    shadowBlur,
+    shadowSpread,
+    shadowColor,
+    shadowInset,
+  } = useStore((state) => state._ImageControlValues);
   const _ImageRatio = useStore((state) => state._ImageRatio); // 🚀 获取图片宽高比
   const _Ratio = useStore((state) => state._Ratio); // 🚀 获取容器宽高比
 
@@ -71,13 +81,33 @@ export const useImageStyle = () => {
       borderRadius: `${radius}px`,
     };
 
-    // 根据showShadow控制阴影显示
+    // 🌟 根据showShadow和光源位置控制阴影显示
     if (showShadow) {
-      style.boxShadow = "5px 6px 16px 0px rgba(0, 0, 0, 0.85)";
+      const insetKeyword = shadowInset ? "inset " : "";
+      style.boxShadow = `${insetKeyword}${shadowOffsetX}px ${shadowOffsetY}px ${shadowBlur}px ${shadowSpread}px ${shadowColor}`;
+
+      // 🎯 添加平滑过渡动画
+      style.transition =
+        "box-shadow 0.2s ease-out, " +
+        (style.transition || "all 0.5s ease-out");
     }
 
     return style;
-  }, [top, left, size, radius, showShadow, _ImageRatio, _Ratio]); // 🚀 添加容器比例依赖
+  }, [
+    top,
+    left,
+    size,
+    radius,
+    showShadow,
+    shadowOffsetX,
+    shadowOffsetY,
+    shadowBlur,
+    shadowSpread,
+    shadowColor,
+    shadowInset,
+    _ImageRatio,
+    _Ratio,
+  ]); // 🚀 添加所有阴影相关的依赖
 };
 
 export default useImageStyle;
