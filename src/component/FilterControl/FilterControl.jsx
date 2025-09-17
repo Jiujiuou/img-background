@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import useStore from "@/store/index";
 import Slider from "@/component/Slider/Slider";
 import InlineControl from "../InlineControl/InlineControl";
-import { ColorPicker } from "@arco-design/web-react";
-import "@arco-design/web-react/dist/css/arco.css";
+import ColorPicker from "@/component/ColorPicker/ColorPicker";
 import styles from "./index.module.less";
 
 function FilterControl() {
@@ -72,7 +71,6 @@ function FilterControl() {
             <ColorPicker
               value={background}
               onChange={handleBackgroundColorChange}
-              showText
             />
           </InlineControl>
         </div>

@@ -1,7 +1,7 @@
 import useStore from "@/store";
 import { saveConfig, loadConfig } from "@/utils/config";
 import style from "./index.module.less";
-import { Message, Button } from "@arco-design/web-react";
+import { Message } from "@arco-design/web-react";
 
 function Header({ download }) {
   const store = useStore();

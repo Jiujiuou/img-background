@@ -4,6 +4,89 @@
  */
 
 /**
+ * 🚀 简化阴影计算 - 仅处理颜色着色
+ *
+ * @param {number} lightX - 光源X位置 (0-100)
+ * @param {number} lightY - 光源Y位置 (0-100)
+ * @param {object} controlOptions - 简化的控制参数
+ * @param {string} controlOptions.tint - 阴影着色 (hex颜色)
+ * @returns {object} 阴影参数
+ */
+export const calculateAdvancedShadowFromLight = (
+  lightX,
+  lightY,
+  controlOptions = {}
+) => {
+  const {
+    tint = "#000000", // 阴影着色
+  } = controlOptions;
+
+  // 1. 基础光源计算（使用现有函数）
+  const baseOptions = {
+    scale: 0.3,
+    maxOffset: 20,
+    baseBlur: 16,
+    baseColor: "0, 0, 0",
+    baseOpacity: 0.85,
+  };
+
+  const baseShadow = calculateShadowFromLight(lightX, lightY, baseOptions);
+
+  // 2. 🎯 Tint (着色) - 将黑色阴影转换为有色阴影
+  const tintRGB = hexToRgb(tint);
+
+  // 3. 🌟 生成最终阴影颜色 (保持原有的透明度逻辑)
+  const finalShadowColor = `rgba(${tintRGB.r}, ${tintRGB.g}, ${
+    tintRGB.b
+  }, ${baseShadow.shadowIntensity.toFixed(2)})`;
+
+  return {
+    // 基础数据保持不变
+    lightX: baseShadow.lightX,
+    lightY: baseShadow.lightY,
+    deltaX: baseShadow.deltaX,
+    deltaY: baseShadow.deltaY,
+    distance: baseShadow.distance,
+    normalizedDistance: baseShadow.normalizedDistance,
+    angle: baseShadow.angle,
+    angleDegrees: baseShadow.angleDegrees,
+
+    // 🚀 阴影属性 (使用基础计算结果，只修改颜色)
+    shadowOffsetX: baseShadow.shadowOffsetX,
+    shadowOffsetY: baseShadow.shadowOffsetY,
+    shadowBlur: baseShadow.shadowBlur,
+    shadowSpread: baseShadow.shadowSpread,
+    shadowColor: finalShadowColor, // 唯一被修改的属性
+    shadowIntensity: baseShadow.shadowIntensity,
+    shadowInset: false,
+
+    // 🎯 简化的控制参数
+    tint,
+
+    // 调试信息
+    debug: {
+      baseShadow,
+      tintRGB,
+      finalShadowColor,
+    },
+  };
+};
+
+/**
+ * 🎨 颜色工具函数：Hex转RGB
+ */
+function hexToRgb(hex) {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result
+    ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16),
+      }
+    : { r: 0, g: 0, b: 0 }; // 默认黑色
+}
+
+/**
  * 光源位置转阴影偏移的映射关系
  *
  * @param {number} lightX - 光源X位置 (0-100)
@@ -159,6 +242,42 @@ export const updateShadowFromLightPosition = (
   preset = "normal"
 ) => {
   const shadowData = calculateShadowWithPreset(lightX, lightY, preset);
+
+  updateImageControlValues({
+    lightX: shadowData.lightX,
+    lightY: shadowData.lightY,
+    shadowOffsetX: shadowData.shadowOffsetX,
+    shadowOffsetY: shadowData.shadowOffsetY,
+    shadowBlur: shadowData.shadowBlur,
+    shadowSpread: shadowData.shadowSpread,
+    shadowColor: shadowData.shadowColor,
+    shadowIntensity: shadowData.shadowIntensity,
+    shadowInset: shadowData.shadowInset,
+  });
+
+  return shadowData;
+};
+
+/**
+ * 🚀 使用简化控制参数更新阴影到Store
+ *
+ * @param {number} lightX - 光源X位置 (0-100)
+ * @param {number} lightY - 光源Y位置 (0-100)
+ * @param {object} controlOptions - 简化的控制参数 (只包含tint)
+ * @param {function} updateImageControlValues - store更新函数
+ * @returns {object} 计算得出的阴影数据
+ */
+export const updateAdvancedShadowFromLightPosition = (
+  lightX,
+  lightY,
+  controlOptions,
+  updateImageControlValues
+) => {
+  const shadowData = calculateAdvancedShadowFromLight(
+    lightX,
+    lightY,
+    controlOptions
+  );
 
   updateImageControlValues({
     lightX: shadowData.lightX,

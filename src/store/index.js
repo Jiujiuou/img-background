@@ -102,6 +102,9 @@ const useStore = create((set) => ({
     shadowColor: "rgba(0, 0, 0, 0.85)", // 阴影颜色
     shadowIntensity: 0.3, // 阴影强度 0-1 (基于光源距离)
     shadowInset: false, // 是否为内阴影
+
+    // 🚀 保留的阴影控制属性
+    shadowTint: "#000000", // 阴影着色 (阴影的颜色色调)
   },
   /**
    * 更新图片控制值
